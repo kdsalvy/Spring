@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Fine logs -->
+	<bean id="myLoggerConfig"
+		class="learn.spring.springdemo.config.MyLoggerConfig"
+		init-method="initLogger">
+		<property name="rootLoggerLevel" value="FINE" />
+		<property name="printedLoggerLevel" value="FINE" />
+	</bean>
+
+	<!-- Beans -->
+	<!-- constructor dependency Injection -->
+	<bean id="myCoach" class="learn.spring.springdemo.xmlconfig.TrackCoach"
+		scope="prototype">
+		<constructor-arg ref="happyFortuneService" />
+	</bean>
+
+	<bean id="happyFortuneService"
+		class="learn.spring.springdemo.xmlconfig.HappyFortuneService">
+	</bean>
+
+
+</beans>
+
+
+
+
+

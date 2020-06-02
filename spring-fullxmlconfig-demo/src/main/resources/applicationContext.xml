@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="myLoggerConfig"
+		class="learn.spring.springdemo.config.MyLoggerConfig"
+		init-method="initLogger">
+		<property name="rootLoggerLevel" value="FINE" />
+		<property name="printedLoggerLevel" value="FINE" />
+	</bean>
+
+	<!-- Properties file ref -->
+	<context:property-placeholder
+		location="classpath:sport.properties" />
+
+	<!-- Beans -->
+	<!-- constructor dependency Injection -->
+	<!-- <bean id="myCoach" class="learn.spring.springdemo.xmlconfig.TrackCoach"> <constructor-arg 
+		ref="happyFortuneService" /> </bean> -->
+	<!--1. constructor dependency Injection 2. referencing values from property 
+		file -->
+	<bean id="myCoach" class="learn.spring.springdemo.xmlconfig.BaseballCoach">
+		<constructor-arg ref="happyFortuneService" />
+		<property name="emailAddress" value="${baseballCoach.email}" />
+		<property name="team" value="${baseballCoach.team}" />
+	</bean>
+
+	<!-- setter dependency injection & literal injection -->
+	<!-- <bean id="myCoach" class="learn.spring.springdemo.practice.xmlconfig.CricketCoach"> 
+		<property name="fortuneService" ref="happyFortuneService" /> <property name="emailAddress" 
+		value="theBestCoach@learnspring.com" /> <property name="team" value="Sunrisers 
+		Hyderabad" /> </bean> -->
+	<bean id="happyFortuneService"
+		class="learn.spring.springdemo.xmlconfig.HappyFortuneService">
+	</bean>
+
+
+</beans>
+
+
+
+
+
